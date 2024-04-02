@@ -9,10 +9,10 @@ import datetime
 import fcntl
 import subprocess
 import sys
-import random
 from dateutil import parser
 from dbSetting import *
 from struct import *
+import secrets
 
 spi_conf = spidev.SpiDev()
 spi_conf.open(0, 0)
@@ -74,7 +74,7 @@ def randomDigit():
     for x in range(200):
         data = []
         for x in range(4):
-            data.append( random.randint(0,9)*16 + random.randint(0,9))
+            data.append( secrets.SystemRandom().randint(0,9)*16 + secrets.SystemRandom().randint(0,9))
             pass
         spi_conf.xfer([4,data[0]])
         spi_conf.xfer([5,data[1]])
